@@ -21,7 +21,7 @@ env:
   #默认主机名
   OWRT_NAME: Redmi-AX6
   #默认源码
-  OWRT_URL: https://github.com/openwrt/openwrt
+  OWRT_URL: https://github.com/robimarko/openwrt
   #默认密码，仅作展示，更改无效
   OWRT_PW: password
   OWRT_IP: 192.168.123.1
@@ -34,17 +34,17 @@ env:
   FILE_NAME: Redmi-AX6-openwrt
   PRODUCT_NAME: Redmi-AX6-openwrt
   OWRT_TYPE: 红米AX6
-  OWRT_LINUX: 6.1-diy
+  OWRT_LINUX: 61-diy
   TZ: Asia/Shanghai
   
   
 jobs:
   AX6-61-openwrt:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: 项目检查
       uses: actions/checkout@main
-        
+      
     - name: 检查分配的服务器性能
       run: |
         echo "警告⚠"
@@ -61,11 +61,11 @@ jobs:
         echo "-----------------------------硬盘信息---------------------------------------------"
         echo -e  "硬盘数量：$(ls /dev/sd* | grep -v [1-9] | wc -l) \n"
         echo "硬盘详情："
-        df -Th 
+        df -Th      
 
     - name: 初始化编译环境
       env:
-      DEBIAN_FRONTEND: noninteractive
+        DEBIAN_FRONTEND: noninteractive
       run: |
         docker rmi `docker images -q`
         [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
@@ -84,7 +84,7 @@ jobs:
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
+        sudo chown $USER:$GROUPS /workdir  
 
     - name: 初始化变量
       run: |
@@ -97,26 +97,23 @@ jobs:
         echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV
         echo "OWRT_TYPE=$OWRT_TYPE" >> $GITHUB_ENV
         echo "OWRT_PW=$OWRT_PW" >> $GITHUB_ENV
-        echo "OWRT_IP=$OWRT_IP" >> $GITHUB_ENV 
-        echo "OWRT_LINUX=$OWRT_LINUX" >> $GITHUB_ENV       
+        echo "OWRT_IP=$OWRT_IP" >> $GITHUB_ENV
+        echo "OWRT_LINUX=$OWRT_LINUX" >> $GITHUB_ENV        
         
     - name: 克隆源码库
       working-directory: /workdir
       run: |
         df -hT $PWD
-        #git clone $OWRT_URL -b $REPO_BRANCH --single-branch openwrt
         git clone $OWRT_URL -b $REPO_BRANCH openwrt
-        #git clone $OWRT_URL openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         [ -e $GITHUB_WORKSPACE/$CONFIG_FILE ] && echo "DEVICE_NAME=$(grep '^CONFIG_TARGET_.*_.*_DEVICE_.*=y' $GITHUB_WORKSPACE/$CONFIG_FILE | sed -r 's/.*DEVICE_(.*)=y/\1/')" >> $GITHUB_ENV
           
     - name: 加载和更新订阅源
       run: |
         cd openwrt
-        echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
+        echo 'src-git mo_ssr https://github.com/rmoyulong/small-package' >>feeds.conf.default
         echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
-        echo 'src-link custom /workdir/openwrt/custom-feed' >> feeds.conf.default
-
+        
         mkdir -p custom-feed/applications
 
         for i in "ipv6-helper"; do \
@@ -141,7 +138,7 @@ jobs:
       with:
         ccache: 'true'
         prefix: ${{ github.workspace }}/openwrt
-        mixkey: ${{ env.OWRT_URL }}/tree/${{ env.REPO_BRANCH }}?device=${{ env.DEVICE_NAME }}-${{ env.OWRT_LINUX }} 
+        mixkey: ${{ env.OWRT_URL }}/tree/${{ env.REPO_BRANCH }}?device=${{ env.DEVICE_NAME }}-${{ env.OWRT_LINUX }}
         
     - name: 更新订阅源
       run: |
