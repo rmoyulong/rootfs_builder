@@ -21,14 +21,14 @@ env:
   #默认主机名
   OWRT_NAME: Redmi-AX6
   #默认源码
-  OWRT_URL: https://github.com/robimarko/openwrt
+  OWRT_URL: https://github.com/openwrt/openwrt
   #默认密码，仅作展示，更改无效
   OWRT_PW: password
   OWRT_IP: 192.168.123.1
   #USE_CACHEWRTBUILD: true
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: Config/diy_imoutowrt.config
+  CONFIG_FILE: Config/diy_openwrt.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2-ext.sh
   FILE_NAME: Redmi-AX6-openwrt
