@@ -111,7 +111,7 @@ jobs:
     - name: 加载和更新订阅源
       run: |
         cd openwrt
-        echo 'src-git mo_ssr https://github.com/rmoyulong/small-package' >>feeds.conf.default
+        echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
         echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
         
         mkdir -p custom-feed/applications
