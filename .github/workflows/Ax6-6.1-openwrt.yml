@@ -146,6 +146,7 @@ jobs:
 
         #$GITHUB_WORKSPACE/Scripts/Plugins.sh
         #SSH欢迎界面等设置
+        cp -rf $GITHUB_WORKSPACE/ax6/banner package/base-files/files/etc/banner
         $GITHUB_WORKSPACE/Scripts/Settings.sh
        
     - name: 自定义设置
