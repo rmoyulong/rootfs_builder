@@ -112,26 +112,8 @@ jobs:
       run: |
         cd openwrt
         echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
+        echo 'src-git mo_turboacc https://github.com/chenmozhijin/turboacc' >>feeds.conf.default
         echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
-        
-        mkdir -p custom-feed/applications
-
-        for i in "ipv6-helper"; do \
-          svn checkout "https://github.com/coolsnowwolf/lede/trunk/package/lean/$i" "custom-feed/applications/$i"; \
-        done
-
-        for i in "luci-app-vlmcsd"; do \
-          svn checkout "https://github.com/coolsnowwolf/luci/trunk/applications/$i" "custom-feed/applications/$i"; \
-        done
-        sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/' custom-feed/applications/luci-app-vlmcsd/Makefile
-
-        for i in "vlmcsd"; do \
-          svn checkout "https://github.com/coolsnowwolf/packages/trunk/net/$i" "custom-feed/applications/$i"; \
-        done
-
-        for i in "luci-app-autoreboot"; do \
-          svn checkout "https://github.com/kenzok8/small-package/trunk/$i" "custom-feed/applications/$i"; \
-        done
         
     - name: 启动缓存[第二次起生效]
       uses: rmoyulong/cachewrtbuild@main
