@@ -34,7 +34,7 @@ env:
   FILE_NAME: Redmi-AX6-openwrt
   PRODUCT_NAME: Redmi-AX6-openwrt
   OWRT_TYPE: 红米AX6
-  OWRT_LINUX: 61-diy
+  OWRT_LINUX: 6.1-diy
   TZ: Asia/Shanghai
   
   
