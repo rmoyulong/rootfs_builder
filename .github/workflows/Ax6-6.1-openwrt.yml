@@ -127,14 +127,6 @@ jobs:
         #cp -rf $GITHUB_WORKSPACE/path/ipq8071-ax6-stock.dts target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax6-stock.dts
         #cp -rf $GITHUB_WORKSPACE/path/ipq8071-ax3600-stock.dts target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax3600-stock.dts
         #cp -rf $GITHUB_WORKSPACE/path/qualcommax_ipq807x package/boot/uboot-envtools/files/qualcommax_ipq807x
-          
-        cp -rf target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network $GITHUB_WORKSPACE/upload/02_network
-        cp -rf target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh $GITHUB_WORKSPACE/upload/platform.sh
-        cp -rf target/linux/qualcommax/ipq807x/base-files/etc/init.d/bootcount $GITHUB_WORKSPACE/upload/bootcount
-        cp -rf target/linux/qualcommax/image/ipq807x.mk $GITHUB_WORKSPACE/upload/ipq807x.mk
-        cp -rf target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax6-stock.dts $GITHUB_WORKSPACE/upload/ipq8071-ax6-stock.dts
-        cp -rf target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax3600-stock.dts $GITHUB_WORKSPACE/upload/ipq8071-ax3600-stock.dts
-        cp -rf package/boot/uboot-envtools/files/qualcommax_ipq807x $GITHUB_WORKSPACE/upload/qualcommax_ipq807x
         
         
     - name: 启动缓存[第二次起生效]
