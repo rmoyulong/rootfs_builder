@@ -216,7 +216,7 @@ jobs:
          设备：${{env.OWRT_TYPE}}
          密码：${{env.OWRT_PW}}
          地址：${{env.OWRT_IP}}
-         内核：6.1.x
+         内核：${{env.OWRT_LINUX}}
         
     - name: 清理Releases
       uses: dev-drprasad/delete-older-releases@master
