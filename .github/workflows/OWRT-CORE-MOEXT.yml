@@ -134,6 +134,9 @@ jobs:
           cd openwrt
           echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
           echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          
+          mv $GITHUB_WORKSPACE/0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
+          git apply 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
 
       - name: 启动缓存[第二次起生效]
         uses: rmoyulong/cachewrtbuild@main
