@@ -1,4 +1,4 @@
-name: AX6-6.1-openwrt
+name: AX6-6.1-openwrt-diy
 
 on: 
   repository_dispatch:
