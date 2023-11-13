@@ -1,5 +1,5 @@
 #CI项目名
-name: Redmi-AX6-openwrt
+name: AX6-6.1-openwrt
 
 on:
   #自动编译：每天早上4点
