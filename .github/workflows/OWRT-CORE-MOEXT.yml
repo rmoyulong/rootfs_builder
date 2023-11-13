@@ -135,11 +135,19 @@ jobs:
           echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
           echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
           
-          mv $GITHUB_WORKSPACE/0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
-          git apply 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
+          #mv $GITHUB_WORKSPACE/path/0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
+          #git apply 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
           
-          cp -rf $GITHUB_WORKSPACE/01_leds target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
-          cp -rf $GITHUB_WORKSPACE/11-ath11k-caldata target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata
+          cp -rf $GITHUB_WORKSPACE/path/01_leds target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
+          cp -rf $GITHUB_WORKSPACE/path/02_network target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network
+          cp -rf $GITHUB_WORKSPACE/path/11-ath10k-caldata target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+          cp -rf $GITHUB_WORKSPACE/path/11-ath11k-caldata target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata
+          cp -rf $GITHUB_WORKSPACE/path/bootcount target/linux/qualcommax/ipq807x/base-files/etc/init.d/bootcount
+          cp -rf $GITHUB_WORKSPACE/path/platform.sh target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh
+          cp -rf $GITHUB_WORKSPACE/path/ipq807x.mk target/linux/qualcommax/image/ipq807x.mk 
+          cp -rf $GITHUB_WORKSPACE/path/ipq8071-ax6-stock.dts target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax6-stock.dts
+          cp -rf $GITHUB_WORKSPACE/path/ipq8071-ax3600-stock.dts target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax3600-stock.dts
+          cp -rf $GITHUB_WORKSPACE/path/qualcommax_ipq807x package/boot/uboot-envtools/files/qualcommax_ipq807x
 
       - name: 启动缓存[第二次起生效]
         uses: rmoyulong/cachewrtbuild@main
