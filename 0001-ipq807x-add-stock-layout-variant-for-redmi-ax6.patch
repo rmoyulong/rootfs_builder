@@ -197,21 +197,6 @@ index 440a267497..0e190f7a5e 100644
  define Device/xiaomi_ax9000
  	$(call Device/FitImage)
  	$(call Device/UbiFit)
-diff --git a/target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds b/target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
-index 6e2ec60403..861b9cd3f8 100644
---- a/target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
-+++ b/target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
-@@ -18,7 +18,9 @@ netgear,wax218)
- 	ucidef_set_led_wlan "wlan2g" "WIFI 2.4GHz" "blue:wlan2g" "phy1radio"
- 	;;
- redmi,ax6|\
--xiaomi,ax3600)
-+redmi,ax6-stock|\
-+xiaomi,ax3600|\
-+xiaomi,ax3600-stock)
- 	ucidef_set_led_netdev "wan" "WAN" "blue:network" "wan"
- 	;;
- qnap,301w)
 diff --git a/target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network b/target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network
 index 3953ae8db2..6c81461fa9 100644
 --- a/target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network
@@ -227,46 +212,6 @@ index 3953ae8db2..6c81461fa9 100644
  		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" "wan"
  		;;
  	zyxel,nbg7815)
-diff --git a/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
-new file mode 100644
-index 0000000000..c6126c0407
---- /dev/null
-+++ b/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
-@@ -0,0 +1,20 @@
-+#!/bin/sh
-+
-+[ -e /lib/firmware/$FIRMWARE ] && exit 0
-+
-+. /lib/functions/caldata.sh
-+
-+board=$(board_name)
-+
-+case "$FIRMWARE" in
-+"ath10k/cal-pci-0000:01:00.0.bin")
-+	case "$board" in
-+	xiaomi,ax3600-stock)
-+		caldata_extract "0:art" 0x33000 0x844
-+		;;
-+	esac
-+	;;
-+*)
-+	exit 1
-+	;;
-+esac
-diff --git a/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata b/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata
-index 742730f476..2603123d68 100644
---- a/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata
-+++ b/target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata
-@@ -18,7 +18,9 @@ case "$FIRMWARE" in
- 	netgear,wax218|\
- 	qnap,301w|\
- 	redmi,ax6|\
-+	redmi,ax6-stock|\
- 	xiaomi,ax3600|\
-+	xiaomi,ax3600-stock|\
- 	xiaomi,ax9000|\
- 	zyxel,nbg7815)
- 		caldata_extract "0:art" 0x1000 0x20000
 diff --git a/target/linux/qualcommax/ipq807x/base-files/etc/init.d/bootcount b/target/linux/qualcommax/ipq807x/base-files/etc/init.d/bootcount
 index 6917446a9b..d79e79a53d 100755
 --- a/target/linux/qualcommax/ipq807x/base-files/etc/init.d/bootcount
