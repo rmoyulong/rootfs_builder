@@ -178,7 +178,9 @@ jobs:
           
           cp -rf $GITHUB_WORKSPACE/ax6/banner package/base-files/files/etc/banner
           $GITHUB_WORKSPACE/Scripts/Settings.sh
-          #$GITHUB_WORKSPACE/Scripts/custom.sh
+          if [[ $OWRT_LINUX == *"6.1.x"*  ]] ; then
+            $GITHUB_WORKSPACE/Scripts/custom.sh
+          if
           
           cd ./package
           $GITHUB_WORKSPACE/Scripts/Plugins.sh
