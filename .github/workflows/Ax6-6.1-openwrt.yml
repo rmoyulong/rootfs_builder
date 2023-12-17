@@ -130,7 +130,8 @@ jobs:
         #git apply 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
         
         chmod +x $GITHUB_WORKSPACE/path/*.sh
-        chmod -Rf 755 $GITHUB_WORKSPACE/path/*
+        chmod -Rf 777 $GITHUB_WORKSPACE/path/*
+        chmod -Rf 777 $GITHUB_WORKSPACE/path/*.*
         mv $GITHUB_WORKSPACE/path/01_leds target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
         mv $GITHUB_WORKSPACE/path/02_network target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network
         mv $GITHUB_WORKSPACE/path/11-ath10k-caldata target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
