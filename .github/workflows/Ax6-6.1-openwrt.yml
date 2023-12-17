@@ -107,6 +107,13 @@ jobs:
         git clone $OWRT_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         [ -e $GITHUB_WORKSPACE/$CONFIG_FILE ] && echo "DEVICE_NAME=$(grep '^CONFIG_TARGET_.*_.*_DEVICE_.*=y' $GITHUB_WORKSPACE/$CONFIG_FILE | sed -r 's/.*DEVICE_(.*)=y/\1/')" >> $GITHUB_ENV
+        
+    - name: 检查脚本
+      run: |
+        cd ./Scripts
+
+        dos2unix ./*.sh
+        chmod +x ./*.sh         
           
     - name: 加载和更新订阅源
       run: |
@@ -127,14 +134,7 @@ jobs:
 
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-          
-    - name: 检查脚本
-      run: |
-        cd ./Scripts
-
-        dos2unix ./*.sh
-        chmod +x ./*.sh           
-
+        
     - name: 自定义脚本
       run: |
         cd openwrt
