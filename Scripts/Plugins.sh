@@ -1,50 +1,31 @@
 #!/bin/bash
 
-#Design Theme
-#git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -iq "lede" && echo "main" || echo "js") https://github.com/gngpp/luci-theme-design.git
-#git clone --depth=1 --single-branch https://github.com/gngpp/luci-app-design-config.git
-#sed -i 's/dark/light/g' luci-app-design-config/root/etc/config/design
-#Argon Theme
-#git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -iq "lede" && echo "18.06" || echo "master") https://github.com/jerrykuku/luci-theme-argon.git
-#git clone --depth=1 --single-branch --branch $(echo $OWRT_URL | grep -iq "lede" && echo "18.06" || echo "master") https://github.com/jerrykuku/luci-app-argon-config.git
-#Linkease
-#git clone --depth=1 --single-branch https://github.com/linkease/istore.git
-#git clone --depth=1 --single-branch https://github.com/linkease/nas-packages.git
-#git clone --depth=1 --single-branch https://github.com/linkease/nas-packages-luci.git
-#Open Clash
-#git clone --depth=1 --single-branch --branch "dev" https://github.com/vernesong/OpenClash.git
-#Pass Wall
-#git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall.git ./pw_luci
-#git clone --depth=1 --single-branch --branch "main" https://github.com/xiaorouji/openwrt-passwall-packages.git ./pw_packages
-
-#预置OpenClash内核和GEO数据
-#export CORE_VER=https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/core_version
-#export CORE_TUN=https://github.com/vernesong/OpenClash/raw/core/dev/premium/clash-linux
-#export CORE_DEV=https://github.com/vernesong/OpenClash/raw/core/dev/dev/clash-linux
-#export CORE_MATE=https://github.com/vernesong/OpenClash/raw/core/dev/meta/clash-linux
-
-#export CORE_TYPE=$(echo $OWRT_TARGET | grep -Eiq "64|86" && echo "amd64" || echo "arm64")
-#export TUN_VER=$(curl -sfL $CORE_VER | sed -n "2{s/\r$//;p;q}")
-
-#export GEO_MMDB=https://github.com/alecthw/mmdb_china_ip_list/raw/release/lite/Country.mmdb
-#export GEO_SITE=https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
-#export GEO_IP=https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geoip.dat
-
-#cd ./OpenClash/luci-app-openclash/root/etc/openclash
-
-#curl -sfL -o ./Country.mmdb $GEO_MMDB
-#curl -sfL -o ./GeoSite.dat $GEO_SITE
-#curl -sfL -o ./GeoIP.dat $GEO_IP
-
-#mkdir ./core && cd ./core
-
-#curl -sfL -o ./tun.gz "$CORE_TUN"-"$CORE_TYPE"-"$TUN_VER".gz
-#gzip -d ./tun.gz && mv ./tun ./clash_tun
-
-#curl -sfL -o ./meta.tar.gz "$CORE_MATE"-"$CORE_TYPE".tar.gz
-#tar -zxf ./meta.tar.gz && mv ./clash ./clash_meta
-
-#curl -sfL -o ./dev.tar.gz "$CORE_DEV"-"$CORE_TYPE".tar.gz
-#tar -zxf ./dev.tar.gz
-
-#chmod +x ./clash* ; rm -rf ./*.gz
+#echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
+echo 'src-git mo_small https://github.com/kiddin9/openwrt-packages' >> feeds.conf.default
+echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        
+rm -rf feeds/luci/modules/luci-base
+rm -rf feeds/luci/modules/luci-mod-status
+rm -rf feeds/packages/utils/coremark
+rm -rf package/emortal/default-settings
+        
+svn export https://github.com/immortalwrt/luci/branches/master/modules/luci-base feeds/luci/modules/luci-base
+svn export https://github.com/immortalwrt/luci/branches/master/modules/luci-mod-status feeds/luci/modules/luci-mod-status
+svn export https://github.com/immortalwrt/packages/branches/master/utils/coremark package/new/coremark
+svn export https://github.com/immortalwrt/immortalwrt/branches/master/package/emortal/default-settings package/emortal/default-settings        
+        
+#mv $GITHUB_WORKSPACE/path/0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
+#git apply 0001-ipq807x-add-stock-layout-variant-for-redmi-ax6.patch
+        
+chmod +x $GITHUB_WORKSPACE/path/*.sh
+chmod -Rf 777 $GITHUB_WORKSPACE/path/*
+chmod -Rf 777 $GITHUB_WORKSPACE/path/*.*
+mv $GITHUB_WORKSPACE/path/01_leds target/linux/qualcommax/ipq807x/base-files/etc/board.d/01_leds
+mv $GITHUB_WORKSPACE/path/02_network target/linux/qualcommax/ipq807x/base-files/etc/board.d/02_network
+mv $GITHUB_WORKSPACE/path/11-ath10k-caldata target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+mv $GITHUB_WORKSPACE/path/11-ath11k-caldata target/linux/qualcommax/ipq807x/base-files/etc/hotplug.d/firmware/11-ath11k-caldata
+mv $GITHUB_WORKSPACE/path/bootcount target/linux/qualcommax/ipq807x/base-files/etc/init.d/bootcount
+mv $GITHUB_WORKSPACE/path/platform.sh target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh
+mv $GITHUB_WORKSPACE/path/ipq807x.mk target/linux/qualcommax/image/ipq807x.mk 
+mv $GITHUB_WORKSPACE/path/ipq8071-ax6-stock.dts target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax6-stock.dts
+mv $GITHUB_WORKSPACE/path/ipq8071-ax3600-stock.dts target/linux/qualcommax/files/arch/arm64/boot/dts/qcom/ipq8071-ax3600-stock.dts
