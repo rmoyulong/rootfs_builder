@@ -181,11 +181,14 @@ jobs:
         run: |
           #[ -e files ] && mv files openwrt/files
           cd openwrt
-
+          
           rm -rf ./tmp* ./.config*
           #rm -rf $(find ./ -type f -iname "*.config*")
           #make dirclean
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && mv $GITHUB_WORKSPACE/Config/$OWRT_CFG .config
+          echo -e 'CONFIG_PACKAGE_luci-app-unblockmusic=n\n' >> .config
+          echo -e 'CONFIG_PACKAGE_luci-app-unblockneteasemusic=n\n' >> .config
+            
           make defconfig
 
       - name: 下载编译依赖
