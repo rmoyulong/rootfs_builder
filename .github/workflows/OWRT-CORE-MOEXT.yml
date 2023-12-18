@@ -34,7 +34,10 @@ on:
         type: string
       OWRT_LINUX:
         required: true
-        type: string     
+        type: string
+      OWRT_FILES:
+        required: true
+        type: string   
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   OWRT_TARGET: ${{inputs.OWRT_TARGET}}

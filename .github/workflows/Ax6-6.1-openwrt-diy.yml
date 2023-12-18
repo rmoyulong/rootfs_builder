@@ -35,11 +35,12 @@ env:
   PRODUCT_NAME: Redmi-AX6-openwrt
   OWRT_TYPE: 红米AX6
   OWRT_LINUX: 6.1-diy
+  OWRT_FILES: patch/files
   TZ: Asia/Shanghai
   
   
 jobs:
-  AX6-61-openwrt:
+  AX6-61-openwrt-diy:
     runs-on: ubuntu-22.04
     steps:
     - name: 项目检查
