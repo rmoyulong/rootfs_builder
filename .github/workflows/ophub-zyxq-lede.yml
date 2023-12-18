@@ -1,5 +1,5 @@
 #CI项目名
-name: ophub-zyxq-lede
+name: ophub-章鱼星球-lede
 
 on:
   #自动编译：每天早上4点
