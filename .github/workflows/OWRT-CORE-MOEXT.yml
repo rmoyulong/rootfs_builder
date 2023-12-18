@@ -46,7 +46,8 @@ env:
   OWRT_CFG: ${{inputs.OWRT_CFG}}
   OWRT_BRANCH: ${{inputs.OWRT_BRANCH}}
   OWRT_TYPE: ${{inputs.OWRT_TYPE}}
-  OWRT_LINUX: ${{inputs.OWRT_LINUX}}
+  OWRT_LINUX: ${{inputs.OWRT_LINUX}}  
+  OWRT_FILES: ${{inputs.OWRT_FILES}}
   TZ: Asia/Shanghai
   #USE_CACHEWRTBUILD: true
   
@@ -202,7 +203,13 @@ jobs:
           #make dirclean
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && mv $GITHUB_WORKSPACE/Config/$OWRT_CFG .config
           echo -e 'CONFIG_PACKAGE_luci-app-unblockmusic=n\n' >> .config
-          echo -e 'CONFIG_PACKAGE_luci-app-unblockneteasemusic=n\n' >> .config          
+          echo -e 'CONFIG_PACKAGE_luci-app-unblockneteasemusic=n\n' >> .config
+
+          #nftable设置
+          if [[ $OWRT_LINUX == *"6.1"*  ]] ; then
+            [ -e $GITHUB_WORKSPACE/patch/files ] && mv $GITHUB_WORKSPACE/patch/files ./files
+          fi
+          
           make defconfig
 
       - name: 下载编译依赖

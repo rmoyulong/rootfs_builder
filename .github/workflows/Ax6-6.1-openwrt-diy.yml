@@ -169,7 +169,13 @@ jobs:
         #make dirclean
         [ -e $GITHUB_WORKSPACE/$CONFIG_FILE ] && mv $GITHUB_WORKSPACE/$CONFIG_FILE .config
         echo -e 'CONFIG_PACKAGE_luci-app-unblockmusic=n\n' >> .config
-        echo -e 'CONFIG_PACKAGE_luci-app-unblockneteasemusic=n\n' >> .config        
+        echo -e 'CONFIG_PACKAGE_luci-app-unblockneteasemusic=n\n' >> .config
+
+        #nftable设置
+        if [[ $OWRT_LINUX == *"6.1"*  ]] ; then
+          [ -e $GITHUB_WORKSPACE/patch/files ] && mv $GITHUB_WORKSPACE/patch/files ./files
+        fi
+          
         make defconfig
       
     - name: 下载编译依赖
