@@ -1,0 +1,192 @@
+#========================================================================================================================
+# https://github.com/ophub/amlogic-s9xxx-openwrt
+# Description: Use Releases file to packaging
+# Cron: min (0 - 59) / hour (0 - 23) / day of month (1 - 31) / month (1 - 12) / day of week (0 - 6)(Sunday - Saturday)
+#========================================================================================================================
+
+name: ophub ARMv8 OpenWrt
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection'
+        required: false
+        default: 'false'
+  #schedule:
+    #- cron: '05 10 * * 4'
+
+#权限
+permissions: write-all        
+
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  #编译平台，X64包含X86,arm
+  OWRT_TARGET: s905d_s912
+  #默认主题
+  OWRT_THEME: material
+  #默认主机名
+  OWRT_NAME: N1_zyxq
+  #默认源码
+  OWRT_URL: https://github.com/immortalwrt/immortalwrt
+  #默认密码，仅作展示，更改无效
+  OWRT_PW: password
+  OWRT_IP: 192.168.1.100
+  #USE_CACHEWRTBUILD: true
+  REPO_BRANCH: master
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: Config/armsr.config
+  DIY_P1_SH: diy-part1.sh
+  DIY_P2_SH: diy-part2-ext.sh
+  OWRT_TYPE: 斐讯N1、章鱼星球
+  OWRT_LINUX: 6.1.60
+  TZ: Asia/Shanghai
+  FILE_NAME: ARMv8
+  PRODUCT_NAME: ARMv8
+  #save/temp
+  OWRT_STORAGE: save
+  kernel_repo: ophub/kernel
+  #stable/flippy/dev/beta
+  kernel_usage: stable
+  builder_name: ophub
+  auto_kernel: true
+  OWRT_BUILDMOD: ophub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id
+
+    steps:
+    - name: 项目检查
+      uses: actions/checkout@v3
+      
+    - name: 检查分配的服务器性能
+      run: |
+        echo "警告⚠"
+        echo "若分配的服务器性能不足，务必及时取消，重新运行！"
+        echo "已知编译成功CPU型号：8370C,8171M,7763"
+        echo "已知性能不足CPU型号：8272CL"
+        echo -e "-------------- ------------CPU信息------------------------------------------\n"
+        echo "CPU物理数量:$(cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l)"
+        echo -e "CPU核心及版本信息：$(cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c) \n"
+        echo "-------------------------------内存信息-------------------------------------------"
+        echo "已安装内存详细信息："
+        sudo lshw -short -C memory | grep GiB
+        echo -e "\n"
+        echo "-----------------------------硬盘信息---------------------------------------------"
+        echo -e  "硬盘数量：$(ls /dev/sd* | grep -v [1-9] | wc -l) \n"
+        echo "硬盘详情："
+        df -Th       
+
+    - name: 初始化编译环境
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        docker rmi `docker images -q`
+        [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq install ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential \
+        bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \
+        git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev \
+        libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
+        mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip libpython3-dev qemu-utils \
+        rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev dos2unix
+        sudo -E apt-get -qq install time
+        sudo -E apt-get -qq install gn
+        sudo -E apt-get -qq autoremove --purge
+        sudo -E apt-get -qq clean
+        sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
+        
+    - name: 初始化变量
+      run: |
+        export OWRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
+        export OWRT_SOURCE=$(echo $OWRT_URL | cut -d '/' -f 5-)
+        #export OWRT_TYPE="cortex-a53"
+
+        echo "OWRT_SOURCE=$OWRT_SOURCE" >> $GITHUB_ENV
+        echo "OWRT_TARGET=$OWRT_TARGET" >> $GITHUB_ENV
+        echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV
+        echo "OWRT_TYPE=$OWRT_TYPE" >> $GITHUB_ENV
+        echo "OWRT_PW=$OWRT_PW" >> $GITHUB_ENV
+        echo "OWRT_IP=$OWRT_IP" >> $GITHUB_ENV
+        echo "OWRT_LINUX=$OWRT_LINUX" >> $GITHUB_ENV
+        echo "OWRT_BUILDMOD=$OWRT_BUILDMOD" >> $GITHUB_ENV
+        
+    - name: 克隆源码库
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $OWRT_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        cd openwrt
+        useVersionInfo=$(git show -s --date=short --format="提交人: %an<br/>提交时间: %cd<br/>提交内容: %s<br/>commit hash: %H")
+        echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
+        echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+        echo "DATE1=$(date "+%Y-%m-%d")" >> $GITHUB_ENV
+        echo "DATE2=$(date "+%Y%m%d")" >> $GITHUB_ENV
+        
+    - name: 打包OpenWrt
+      uses: ophub/amlogic-s9xxx-openwrt@main
+      with:
+        openwrt_path: https://github.com/rmoyulong/ophub-OpenWrt/releases/download/OpenWrt_s912_23.12.15_08.38.04/openwrt-armvirt-64-generic-rootfs.tar.gz
+        openwrt_board: ${{ env.OWRT_TARGET }}
+        openwrt_kernel: ${{ env.OWRT_LINUX }}
+        auto_kernel: ${{ inputs.auto_kernel }}
+        kernel_repo: ${{ inputs.kernel_repo }}
+        kernel_usage: ${{ inputs.kernel_usage }}
+        builder_name: ${{ inputs.builder_name }}
+          
+    - name: 上传固件
+      uses: rmoyulong/action-gh-release@master
+      if: ${{ env.PACKAGED_STATUS == 'success' }} && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: OpenWrt_${{ env.OWRT_TARGET }}_${{ env.OWRT_DATE }}
+        files: ${{ env.PACKAGED_OUTPUTPATH }}/*
+        body: |
+          自用${{env.OWRT_TYPE}}固件！首次使用建议全新刷写！
+          =============基本信息============
+
+          源码：${{env.OWRT_SOURCE}}
+          平台：${{env.OWRT_TARGET}}
+          设备：${{env.OWRT_TYPE}}
+          密码：${{env.OWRT_PW}}
+          地址：${{env.OWRT_IP}}
+          内核：${{env.OWRT_LINUX}}
+          打包方式：${{env.OWRT_BUILDMOD}}
+
+    - name: 删除旧的工作流
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        delete_workflow_pattern: Releases ARMv8 OpenWrt
+        retain_days: 30
+        keep_minimum_runs: 10
+
+    - name: 删除过老的标签
+      uses: codesnas/delete-older-releases@main
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      with:
+        #repo:
+        keep_latest: 5
+        delete_tag_pattern: ARMv8
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    #- name: Telegram notification
+    #  run: |
+    #    MSG="
+    #    打包时间：${{ env.DATE }}
+    #    OpenWrt 更新信息：${{ env.useVersionInfo }}
+    #    ${{ env.PRODUCT_NAME }} 打包完成
+    #    "
+    #    curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_TO }}&text=${MSG}"
