@@ -203,6 +203,9 @@ jobs:
           cd openwrt
           ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
 
+      - name: 安装订阅源
+        run: |
+          cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
@@ -247,7 +250,8 @@ jobs:
           # Clean up server space
           cd openwrt/
           mkdir output
-          cp -f bin/targets/*/*/*rootfs.tar.gz output/
+          [[ -f bin/targets/*/*/*rootfs.tar.gz ]] && cp -f bin/targets/*/*/*rootfs.tar.gz output/
+          [[ -f bin/targets/*/*/*rootfs.tar ]] && cp -f bin/targets/*/*/*rootfs.tar output/
           cp -f .config output/config
           rm -rf $(ls . | grep -v "^output$" | xargs) 2>/dev/null
           
