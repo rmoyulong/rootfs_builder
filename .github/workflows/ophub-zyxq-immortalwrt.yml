@@ -32,7 +32,7 @@ jobs:
       #源码版本
       OWRT_BRANCH: master
       #自定义config
-      OWRT_CFG: armsr.config
+      OWRT_CFG: armsr_zyxq.config
       #设备类型
       OWRT_TYPE: 章鱼星球
       OWRT_LINUX: 6.1.60
