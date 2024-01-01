@@ -1,0 +1,11 @@
+
+config global
+	option https '0'
+	option enable '1'
+	list open_basedir '/mnt/sda1/'
+	option project_directory '/mnt/sda1/www/kodbox_9020'
+	option port '9020'
+	option ipv6 '1'
+	option memory_limit '500M'
+	option upload_max_filesize '500M'
+
