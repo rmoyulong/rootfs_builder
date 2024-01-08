@@ -20,7 +20,6 @@ HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 
 # Ciphers and keying
-Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
 #RekeyLimit default none
 
 # Logging
@@ -30,10 +29,15 @@ Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes256-ctr,aes192-ctr,aes1
 # Authentication:
 
 #LoginGraceTime 2m
-PermitRootLogin yes
+#PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
+
+PermitRootLogin yes
+StrictModes yes
+UsePAM yes
+
 
 #PubkeyAuthentication yes
 
@@ -115,5 +119,3 @@ Subsystem	sftp	/usr/lib/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
-#HostkeyAlgorithms +ssh-rsa
-#PubkeyAcceptedAlgorithms +ssh-rsa
