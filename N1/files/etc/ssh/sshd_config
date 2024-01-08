@@ -30,10 +30,14 @@ Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes256-ctr,aes192-ctr,aes1
 # Authentication:
 
 #LoginGraceTime 2m
-PermitRootLogin yes
+#PermitRootLogin yes
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
+
+PermitRootLogin yes
+StrictModes yes
+UsePAM yes
 
 #PubkeyAuthentication yes
 
