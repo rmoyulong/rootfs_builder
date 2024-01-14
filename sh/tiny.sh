@@ -16,8 +16,8 @@ rm -rf feeds/luci/applications/luci-app-homeproxy
 
 # 科学上网插件
 git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-echo 'src-git kiddin9 https://github.com/kiddin9/openwrt-packages' >> feeds.conf.default
-#echo 'src-git mo_app https://github.com/rmoyulong/mo_app' >> feeds.conf.default
+echo 'src-git kenzok8 https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
+echo 'src-git mo_app https://github.com/rmoyulong/mo_app' >> feeds.conf.default
 
 # Themes
 git clone --depth=1 -b 18.06 https://github.com/kiddin9/luci-theme-edge package/luci-theme-edge
