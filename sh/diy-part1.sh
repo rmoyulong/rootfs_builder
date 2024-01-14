@@ -23,7 +23,6 @@ rm -rf feeds/luci/applications/luci-app-homeproxy
 echo 'src-git kiddin9 https://github.com/kiddin9/openwrt-packages' >> feeds.conf.default
 
 # Themes
-git clone --depth=1 -b 18.06 https://github.com/kiddin9/luci-theme-edge package/luci-theme-edge
 git clone --depth=1 https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom package/luci-theme-infinityfreedom
 
 # 取消主题默认设置
