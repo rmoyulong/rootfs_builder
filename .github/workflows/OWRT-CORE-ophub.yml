@@ -214,7 +214,7 @@ jobs:
           
           cd openwrt
           
-          if [[ $DIY_P1_SH == *"quick.sh"*  ]] ; then
+          if [[ $DIY_P1_SH == *"tiny.sh"*  ]] ; then
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
           else
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
