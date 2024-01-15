@@ -70,6 +70,7 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-app-bypass
 
 # 科学上网插件依赖
 git_sparse_clone main https://github.com/kenzok8/small-package v2dat
+git_sparse_clone main https://github.com/kenzok8/small-package lua-maxminddb
 git_sparse_clone main https://github.com/kenzok8/small-package shadowsocks-libev
 git_sparse_clone main https://github.com/kenzok8/small-package brook
 git_sparse_clone main https://github.com/kenzok8/small-package trojan-go
