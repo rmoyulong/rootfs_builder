@@ -1,5 +1,5 @@
 #CI项目名
-name: ophub-斐讯N1-immortalwrt
+name: ophub-斐讯N1-armsr
 
 on:
   #自动编译：每天早上4点
