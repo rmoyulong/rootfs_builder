@@ -33,7 +33,7 @@ jobs:
       OWRT_BRANCH: master
       #自定义config
       OWRT_CFG: ARMv8.config
-      #OWRT_CFG: armvirt_N1.config
+      #OWRT_CFG: armv8-plus.config
       #设备类型
       OWRT_TYPE: 斐讯N1
       OWRT_LINUX: 6.1.60
