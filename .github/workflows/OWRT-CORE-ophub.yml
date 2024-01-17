@@ -199,18 +199,22 @@ jobs:
           #git clone $OWRT_URL openwrt
           ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && echo "DEVICE_NAME=$(grep '^CONFIG_TARGET_.*_.*_DEVICE_.*=y' $GITHUB_WORKSPACE/Config/$OWRT_CFG | sed -r 's/.*DEVICE_(.*)=y/\1/')" >> $GITHUB_ENV
-          
+         
           # Set output information
           echo "build_tag=OpenWrt_${OWRT_TARGET}_${{ env.OWRT_STORAGE }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
           echo -e "REPO_URL: [ ${REPO_URL} ]\nREPO_BRANCH: [ ${REPO_BRANCH} ]\nTAGS_NAME: [ ${OWRT_NAME} ]"
           df -hT ${PWD}
           echo "status=success" >> ${GITHUB_OUTPUT}          
 
-      #- name: 加载自定义订阅源
-        #run: |
-          #cd openwrt
-          #echo 'src-git mo_small https://github.com/kenzok8/small-package' >>feeds.conf.default
-          #echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+      - name: 加载lede armvirt架构
+        run: |
+          cd openwrt
+          if [[ $REPO_URL == *"lede"* ]]; then
+            echo "lede库不需要加载armvirt架构！"
+          else
+            mv $GITHUB_WORKSPACE/lede/target/linux/armvirt target/linux/armvirt
+            chmod -Rf 755 target/linux/armvirt 
+          fi
 
       - name: 启动缓存[第二次起生效]
         uses: rmoyulong/cachewrtbuild@main
