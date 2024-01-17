@@ -229,6 +229,12 @@ jobs:
       - name: 安装订阅源
         run: |
           cd openwrt
+          
+          if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
+            # 修改 Makefile
+            mv ${GITHUB_WORKSPACE}/patch/Makefile feeds/packages/utils/xfsprogs/Makefile
+          fi
+          
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
