@@ -28,12 +28,12 @@ jobs:
       #默认地址
       OWRT_IP: 192.168.1.100
       #默认源码
-      OWRT_URL: https://github.com/immortalwrt/immortalwrt
+      OWRT_URL: https://github.com/coolsnowwolf/lede
       #源码版本
       OWRT_BRANCH: master
       #自定义config
-      OWRT_CFG: ARMv8.config
-      #OWRT_CFG: armv8-plus.config
+      #OWRT_CFG: ARMv8.config
+      OWRT_CFG: armv8-plus.config
       #设备类型
       OWRT_TYPE: 章鱼星球
       OWRT_LINUX: 6.1.60
