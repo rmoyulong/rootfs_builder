@@ -1,5 +1,5 @@
 #CI项目名
-name: ophub-斐讯N1-lede
+name: ophub-斐讯N1-armvirt
 
 on:
   #自动编译：每天早上4点
