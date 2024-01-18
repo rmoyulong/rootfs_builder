@@ -37,8 +37,7 @@ jobs:
       OWRT_TYPE: 章鱼星球
       OWRT_LINUX: 6.1.60
       OWRT_FILES: zyxq/files
-      #OWRT_DIY_P1_SH: sh/quick.sh
-      OWRT_DIY_P1_SH: sh/tiny.sh
+      OWRT_DIY_P1_SH: sh/quick.sh
       OWRT_DIY_P2_SH: sh/diy-part2.sh
       #save/temp
       OWRT_STORAGE: save
