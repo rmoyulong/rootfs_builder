@@ -228,7 +228,12 @@ jobs:
           [[ -f "${FEEDS_CONF}" ]] && cp -f ${FEEDS_CONF} openwrt/feeds.conf.default
           
           cd openwrt
-          ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
+          if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
+            cp -f $GITHUB_WORKSPACE/lede/feeds.conf.default feeds.conf.default
+            ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
+          else
+            ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}          
+          fi
 
       - name: 安装订阅源
         run: |
