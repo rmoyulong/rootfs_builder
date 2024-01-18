@@ -22,5 +22,4 @@ rm -rf feeds/luci/applications/luci-app-homeproxy
 
 echo 'src-git kiddin9 https://github.com/kiddin9/openwrt-packages' >> feeds.conf.default
 git clone --depth=1 https://github.com/Joecaicai/luci-theme-ifit package/luci-theme-ifit 
-echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
