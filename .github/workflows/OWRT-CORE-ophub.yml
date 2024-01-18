@@ -188,7 +188,7 @@ jobs:
             mv $GITHUB_WORKSPACE/lede/target/linux/armvirt target/linux/armvirt
             chmod -Rf 755 target/linux/armvirt 
           fi
-          sudo curl -L -o feeds/packages/utils/xfsprogs/Makefiles https://raw.githubusercontent.com/yunxi993/OpenWrt-ARMv8/main/patch/Makefile > 
+          sudo curl -L -o feeds/packages/utils/xfsprogs/Makefile https://raw.githubusercontent.com/yunxi993/OpenWrt-ARMv8/main/patch/Makefile > 
 
       - name: 启动缓存[第二次起生效]
         uses: rmoyulong/cachewrtbuild@main
