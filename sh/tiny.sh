@@ -18,7 +18,6 @@ rm -rf feeds/luci/applications/luci-app-homeproxy
 #git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 echo 'src-git kenzok8 https://github.com/kenzok8/small-package' >> feeds.conf.default
 echo 'src-git mo_app https://github.com/rmoyulong/mo_app' >> feeds.conf.default
-echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
 #Open Clash
 cd ./package
