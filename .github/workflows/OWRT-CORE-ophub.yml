@@ -120,7 +120,6 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           if [[ "${{ inputs.OWRT_URL }}" == *"immortalwrt"* ]]; then
-            docker rmi $(docker images -q)
             sudo -E rm -rf $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "1{s/\r$//;p;q}")
             sudo -E apt -yqq update
             sudo -E apt -yqq purge $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "2{s/\r$//;p;q}")
