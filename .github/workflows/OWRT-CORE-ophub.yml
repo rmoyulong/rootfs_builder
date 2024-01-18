@@ -203,7 +203,7 @@ jobs:
           cd openwrt
           
           if [[ $REPO_URL == *"lede"* ]]; then
-            cp -f $GITHUB_WORKSPACE/lede/feeds.conf.default feeds.conf.default
+            #cp -f $GITHUB_WORKSPACE/lede/feeds.conf.default feeds.conf.default
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
           else
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
