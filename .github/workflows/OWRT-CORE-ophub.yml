@@ -223,15 +223,15 @@ jobs:
         run: |
           [[ -f "${FEEDS_CONF}" ]] && cp -f ${FEEDS_CONF} openwrt/feeds.conf.default
           
-          cd openwrt          
-          echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          cd openwrt
           
-          if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
+          if [[ $REPO_URL == *"lede"* ]]; then
             cp -f $GITHUB_WORKSPACE/lede/feeds.conf.default feeds.conf.default
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
           else
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
           fi
+          echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: 安装订阅源
         run: |
