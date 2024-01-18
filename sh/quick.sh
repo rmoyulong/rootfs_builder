@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
 # 移除要替换的包
 rm -rf feeds/packages/net/mosdns
 rm -rf feeds/packages/net/msd_lite
