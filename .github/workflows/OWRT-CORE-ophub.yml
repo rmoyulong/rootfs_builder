@@ -108,19 +108,26 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          docker rmi $(docker images -q)
-          sudo -E rm -rf $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "1{s/\r$//;p;q}")
-          sudo -E apt -yqq update
-          sudo -E apt -yqq purge $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "2{s/\r$//;p;q}")
-          sudo -E apt -yqq full-upgrade
-          sudo -E apt -yqq install $(cat $GITHUB_WORKSPACE/Depends.txt | sed -n "3{s/\r$//;p;q}")
-          sudo -E apt -yqq autoremove --purge
-          sudo -E apt -yqq autoclean
-          sudo -E apt -yqq clean
-          sudo -E systemctl daemon-reload
-          sudo -E timedatectl set-timezone "Asia/Shanghai"
+          docker rmi `docker images -q`
+          [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
+          sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc
+          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
+          sudo -E apt-get -qq update
+          sudo -E apt-get -qq install ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential \
+          bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \
+          git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev \
+          libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
+          mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python2.7 python3 python3-pip libpython3-dev qemu-utils \
+          rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev dos2unix
+          sudo -E apt-get -qq install time
+          sudo -E apt-get -qq install gn
+          sudo -E apt-get -qq autoremove --purge
+          sudo -E apt-get -qq clean
+          sudo timedatectl set-timezone "$TZ"
           sudo mkdir -p /workdir
-          sudo chown $USER:$GROUPS /workdir  
+          sudo chown $USER:$GROUPS /workdir
+          echo "status=success" >> ${GITHUB_OUTPUT}
+          df -Th          
 
       - name: 初始化变量
         run: |
@@ -184,9 +191,6 @@ jobs:
           cd openwrt
           if [[ $REPO_URL == *"lede"* ]]; then
             echo "lede库不需要加载armvirt架构！"
-            
-            mkdir -p feeds/packages/utils/xfsprogs
-            curl -L -o feeds/packages/utils/xfsprogs/Makefile https://raw.githubusercontent.com/yunxi993/OpenWrt-ARMv8/main/patch/Makefile
           else
             mv $GITHUB_WORKSPACE/lede/target/linux/armvirt target/linux/armvirt
             chmod -Rf 755 target/linux/armvirt 
@@ -205,13 +209,9 @@ jobs:
           
           cd openwrt
           
-          if [[ $REPO_URL == *"lede"* ]]; then
-            #cp -f $GITHUB_WORKSPACE/lede/feeds.conf.default feeds.conf.default
-            ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
-          else
-            ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
-          fi
           echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
+          
 
       - name: 安装订阅源
         run: |
@@ -235,7 +235,7 @@ jobs:
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
             #删除冲突的插件 
             rm -rf feeds/kiddin9/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-          fi          
+          fi
 
       - name: 自定义设置
         run: |
