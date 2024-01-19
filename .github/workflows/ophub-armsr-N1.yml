@@ -32,12 +32,12 @@ jobs:
       #源码版本
       OWRT_BRANCH: master
       #自定义config
-      OWRT_CFG: armsr-N1-full.config
+      OWRT_CFG: N1-armsr.config
       #设备类型
       OWRT_TYPE: 斐讯N1
       OWRT_LINUX: 6.1.60
       OWRT_FILES: N1/files
-      OWRT_DIY_P1_SH: sh/quick.sh
+      OWRT_DIY_P1_SH: sh/tiny.sh
       OWRT_DIY_P2_SH: sh/diy-part2.sh
       #save/temp
       OWRT_STORAGE: save
