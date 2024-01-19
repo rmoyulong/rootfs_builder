@@ -186,16 +186,6 @@ jobs:
           df -hT ${PWD}
           echo "status=success" >> ${GITHUB_OUTPUT}          
 
-      - name: 加载lede armvirt架构
-        run: |
-          cd openwrt
-          if [[ $REPO_URL == *"lede"* ]]; then
-            echo "lede库不需要加载armvirt架构！"
-          else
-            mv $GITHUB_WORKSPACE/lede/target/linux/armvirt target/linux/armvirt
-            chmod -Rf 755 target/linux/armvirt 
-          fi
-
       - name: 启动缓存[第二次起生效]
         uses: rmoyulong/cachewrtbuild@main
         with:
@@ -207,8 +197,7 @@ jobs:
         run: |
           [[ -f "${FEEDS_CONF}" ]] && cp -f ${FEEDS_CONF} openwrt/feeds.conf.default
           
-          cd openwrt
-          
+          cd openwrt          
           echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
           ${GITHUB_WORKSPACE}/${OWRT_DIY_P1_SH}
           
