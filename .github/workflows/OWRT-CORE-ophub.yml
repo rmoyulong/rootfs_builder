@@ -248,7 +248,6 @@ jobs:
       - name: 编译固件
         id: compile
         run: |
-          chmod -R 755 openwrt
           cd openwrt/
           echo -e "$(nproc) thread compile"
           make -j$(($(nproc) + 1)) V=s || make -j1 || make -j1 V=s
