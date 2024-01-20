@@ -238,11 +238,11 @@ jobs:
             # Add autocore support for armvirt
             sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
             
-            mv ${GITHUB_WORKSPACE}/patch/armv8.patch feeds/packages/armv8.patch
-            cd feeds/packages/
+            #mv ${GITHUB_WORKSPACE}/patch/armv8.patch feeds/packages/armv8.patch
+            #cd feeds/packages/
             #dos2unix ./*.patch
             #chmod +x ./*.patch
-            git apply armv8.patch
+            #git apply armv8.patch
           fi
 
       - name: 下载编译依赖
