@@ -240,8 +240,8 @@ jobs:
             
             mv ${GITHUB_WORKSPACE}/patch/armv8.patch feeds/packages/armv8.patch
             cd feeds/packages/
-            dos2unix ./*.patch
-            chmod +x ./*.patch
+            #dos2unix ./*.patch
+            #chmod +x ./*.patch
             git apply armv8.patch
           fi
 
