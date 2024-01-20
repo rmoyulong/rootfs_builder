@@ -72,8 +72,6 @@ git_sparse_clone main https://github.com/kenzok8/small-package trojan-plus
 git_sparse_clone main https://github.com/kenzok8/small-package sagernet-core
 git_sparse_clone main https://github.com/kenzok8/small-package lua-neturl
 git_sparse_clone main https://github.com/kenzok8/small-package redsocks2
-git_sparse_clone main https://github.com/kenzok8/small-package aria2
-git_sparse_clone main https://github.com/kenzok8/small-package ariang
 git_sparse_clone main https://github.com/kenzok8/small-package filebrowser
 git_sparse_clone main https://github.com/kenzok8/small-package qBittorrent-Enhanced-Edition
 git_sparse_clone main https://github.com/kenzok8/small-package qBittorrent-static
@@ -94,6 +92,8 @@ git_sparse_clone master https://github.com/kiddin9/openwrt-packages n2n
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages adbyby
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages dns-forwarder
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages upx
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages aria2
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages ariang
 
 # Themes
 git clone --depth=1 -b 18.06 https://github.com/kiddin9/luci-theme-edge package/luci-theme-edge
