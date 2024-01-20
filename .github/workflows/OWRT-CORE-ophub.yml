@@ -237,6 +237,8 @@ jobs:
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
             mkdir -p feeds/packages/utils/xfsprogs
             curl -fsSL https://raw.githubusercontent.com/rmoyulong/rootfs_builder/master/patch/Makefile > feeds/packages/utils/xfsprogs/Makefile
+            # Add autocore support for armvirt
+            sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
           fi
 
       - name: 下载编译依赖
