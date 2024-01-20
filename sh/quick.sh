@@ -86,7 +86,6 @@ git_sparse_clone master https://github.com/kiddin9/openwrt-packages ddns-scripts
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages qBittorrent-Enhanced-Edition
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages qBittorrent-static
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages qBittorrent
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages qt6base
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages qt6tools
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages n2n
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages adbyby
