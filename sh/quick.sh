@@ -39,6 +39,7 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-app-ramfree
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-kodexplorer
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-xlnetacc
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-pushbot
+git_sparse_clone main https://github.com/kenzok8/small-package luci-app-qbittorrent
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-wrtbwmon
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-unblockmusic
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-unblockneteasemusic
@@ -47,7 +48,6 @@ git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-zer
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-xunlei
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-adbyby-plus
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-n2n
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-qbittorrent
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-homebox
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-turboacc
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-usb-printer
@@ -75,6 +75,13 @@ git_sparse_clone main https://github.com/kenzok8/small-package redsocks2
 git_sparse_clone main https://github.com/kenzok8/small-package aria2
 git_sparse_clone main https://github.com/kenzok8/small-package ariang
 git_sparse_clone main https://github.com/kenzok8/small-package filebrowser
+git_sparse_clone main https://github.com/kenzok8/small-package qBittorrent-Enhanced-Edition
+git_sparse_clone main https://github.com/kenzok8/small-package qBittorrent-static
+git_sparse_clone main https://github.com/kenzok8/small-package qBittorrent
+git_sparse_clone main https://github.com/kenzok8/small-package qt6base
+git_sparse_clone main https://github.com/kenzok8/small-package qtbase
+git_sparse_clone main https://github.com/kenzok8/small-package qttools
+git_sparse_clone main https://github.com/kenzok8/small-package rblibtorrent
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages vlmcsd
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages sing-box
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages UnblockNeteaseMusic-Go
@@ -83,9 +90,6 @@ git_sparse_clone master https://github.com/kiddin9/openwrt-packages wrtbwmon
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages homebox
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages vsftpd-alt
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages ddns-scripts
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages qBittorrent-Enhanced-Edition
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages qBittorrent-static
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages qt6tools
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages n2n
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages adbyby
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages dns-forwarder
