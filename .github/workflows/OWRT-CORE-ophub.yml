@@ -231,14 +231,18 @@ jobs:
           cd openwrt
           
           rm -rf ./tmp* ./.config*
-          #rm -rf $(find ./ -type f -iname "*.config*")*          
-          #make dirclean
+          
+          #armvirt补丁
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && mv $GITHUB_WORKSPACE/Config/$OWRT_CFG .config
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
-            mkdir -p feeds/packages/utils/xfsprogs
-            curl -fsSL https://raw.githubusercontent.com/rmoyulong/rootfs_builder/master/patch/Makefile > feeds/packages/utils/xfsprogs/Makefile
             # Add autocore support for armvirt
             sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
+            
+            mv ${GITHUB_WORKSPACE}/patch/armv8.patch feeds/packages/armv8.patch
+            cd feeds/packages/
+            dos2unix ./*.patch
+            chmod +x ./*.patch
+            git apply armv8.patch
           fi
 
       - name: 下载编译依赖
