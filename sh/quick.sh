@@ -129,7 +129,7 @@ git_sparse_clone main https://github.com/kenzok8/small-package ddnsto
 # Alist
 #git_sparse_clone main https://github.com/kenzok8/small-package luci-app-alist
 #git_sparse_clone main https://github.com/kenzok8/small-package alist
-git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
+#git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
 
 # iStore
 git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
@@ -144,6 +144,12 @@ chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
 # 取消主题默认设置
 find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
 
+sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
+# 临时修复acpid,xfsprogs,aliyundrive-webdav
+sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
+sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
+#sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
+			
 #Open Clash
 cd ./package
 
