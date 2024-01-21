@@ -237,7 +237,7 @@ jobs:
           #armvirt补丁
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
             # Add autocore support for armvirt
-            sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
+            #sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
             #curl -fsSL https://raw.githubusercontent.com/rmoyulong/rootfs_builder/master/patch/armv8.patch > feeds/packages/utils/xfsprogs/Makefile
             #mv ${GITHUB_WORKSPACE}/patch/armv8.patch feeds/packages/armv8.patch
             #cd feeds/packages/
@@ -245,7 +245,7 @@ jobs:
             #chmod +x ./*.patch
             #git apply armv8.patch
             # 临时修复acpid,xfsprogs,aliyundrive-webdav
-            sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
+            #sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
             sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
             #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
           fi
