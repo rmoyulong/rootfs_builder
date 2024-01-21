@@ -73,6 +73,12 @@ sed -i "48a\\
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config\n\
 " package/lean/default-settings/files/zzz-default-settings
 
+sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
+# 临时修复acpid,xfsprogs,aliyundrive-webdav
+sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
+sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
+sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefil
+
 
 # Modify default banner
 echo 'Modify default banner...'
