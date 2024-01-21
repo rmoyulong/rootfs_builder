@@ -131,15 +131,16 @@ git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
 # DDNS.to
-git_sparse_clone main https://github.com/kenzok8/small-package luci-app-ddnsto
-git_sparse_clone main https://github.com/kenzok8/small-package ddnsto
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-ddnsto
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages ddnsto
 
 # Alist
 #git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
 
 # iStore
-git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
-git_sparse_clone main https://github.com/linkease/istore luci
+#git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
+#git_sparse_clone main https://github.com/linkease/istore luci
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-store
 
 # 在线用户
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-onliner
