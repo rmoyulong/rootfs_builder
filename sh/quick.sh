@@ -56,7 +56,7 @@ git_sparse_clone main https://github.com/kenzok8/small-package luci-app-ramfree
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-kodexplorer
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-xlnetacc
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-pushbot
-git_sparse_clone main https://github.com/kenzok8/small-package luci-app-qbittorrent
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-qbittorrent
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-wrtbwmon
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-unblockmusic
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-unblockneteasemusic
