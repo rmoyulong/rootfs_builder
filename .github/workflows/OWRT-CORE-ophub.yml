@@ -169,7 +169,7 @@ jobs:
               REPO_BRANCH="master"
               TAGS_NAME="immortalwrt"
           else
-              echo "Unknown source code repository."
+              echo "未知的源代码存储库."
               exit 1
           fi        
         
@@ -230,8 +230,7 @@ jobs:
           [[ -f "$GITHUB_WORKSPACE/$OWRT_FILES" ]] && cp -f $GITHUB_WORKSPACE/$OWRT_FILES openwrt/files
           cd openwrt
           
-          rm -rf ./tmp* ./.config*
-          
+          rm -rf ./tmp* ./.config*          
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && mv $GITHUB_WORKSPACE/Config/$OWRT_CFG .config
           
       - name: 下载编译依赖
