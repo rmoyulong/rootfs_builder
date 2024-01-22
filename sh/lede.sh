@@ -26,22 +26,22 @@ function git_sparse_clone() {
 
 echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
 echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-vlmcsd
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-vlmcsd
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-kodexplorer
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-usb-printer
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-usb-printer
 git clone --depth=1 https://github.com/immortalwrt/homeproxy package/luci-app-homeproxy
-git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
-git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
-git clone --depth=1 https://github.com/destan19/OpenAppFilter package/OpenAppFilter
-git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
+#git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
+#git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
+#git clone --depth=1 https://github.com/destan19/OpenAppFilter package/OpenAppFilter
+#git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
 
 # 在线用户
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-onliner
 sudo chmod -Rf 755 package/luci-app-onliner
 
 # msd_lite
-git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
-git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
+#git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
+#git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
 
 #Open Clash
