@@ -215,6 +215,8 @@ jobs:
           
           if [[ $DIY_P1_SH == *"quick.sh"*  ]] ; then
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
+          elif [[ $DIY_P1_SH == *"lede.sh"*  ]] ; then
+            ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}            
           elif [[ $DIY_P1_SH == *"tiny.sh"*  ]] ; then
             ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
             #删除冲突的插件 
