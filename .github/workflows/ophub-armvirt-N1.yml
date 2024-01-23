@@ -43,6 +43,6 @@ jobs:
       OWRT_STORAGE: save
       kernel_repo: ophub/kernel
       #stable/flippy/dev/beta
-      kernel_usage: stabl1
+      kernel_usage: stable
       builder_name: ophub
       auto_kernel: true
