@@ -37,12 +37,12 @@ jobs:
       OWRT_TYPE: 斐讯N1
       OWRT_LINUX: 6.1.70
       OWRT_FILES: N1/files
-      OWRT_DIY_P1_SH: sh/lede.sh
+      OWRT_DIY_P1_SH: sh/diy-part1.sh
       OWRT_DIY_P2_SH: sh/diy-part2.sh
       #save/temp
       OWRT_STORAGE: save
       kernel_repo: ophub/kernel
       #stable/flippy/dev/beta
-      kernel_usage: stable
+      kernel_usage: stabl1
       builder_name: ophub
       auto_kernel: true
