@@ -50,8 +50,6 @@ sudo chmod -Rf 755 package/luci-app-onliner
 # msd_lite
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
-git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
-
 
 #Open Clash
 cd ./package
