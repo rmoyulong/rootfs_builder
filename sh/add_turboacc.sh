@@ -4,16 +4,16 @@ trap 'rm -rf "$TMPDIR"' EXIT
 TMPDIR=$(mktemp -d) || exit 1
 
 if ! [ -d "./package" ]; then
-    echo "./package not found"
+    echo "./package 没有发现"
     exit 1
 fi
 
 kernel_versions="$(find "./include"|sed -n '/kernel-[0-9]/p'|sed -e "s@./include/kernel-@@" |sed ':a;N;$!ba;s/\n/ /g')"
 if [ -z "$kernel_versions" ]; then
-    echo "Error: Unable to get kernel version, script exited"
+    echo "Error: 不能获得kernel版本, 脚本退出"
     exit 1
 fi
-echo "kernel version: $kernel_versions"
+echo "kernel 版本: $kernel_versions"
 
 if [ -d "./package/turboacc" ]; then
     rm -rf "./package/turboacc"
