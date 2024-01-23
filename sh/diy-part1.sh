@@ -1,4 +1,22 @@
 #!/bin/bash
+
+# 移除要替换的包
+rm -rf feeds/packages/net/alist
+rm -rf feeds/packages/net/aria2
+rm -rf feeds/packages/net/ariang
+rm -rf feeds/packages/net/mosdns
+rm -rf feeds/packages/net/msd_lite
+rm -rf feeds/packages/net/smartdns
+rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/luci/applications/luci-app-msd_lite
+rm -rf feeds/luci/applications/luci-app-smartdns
+rm -rf feeds/luci/themes/luci-theme-argon
+rm -rf feeds/luci/themes/luci-theme-netgear
+rm -rf feeds/luci/applications/luci-app-netdata
+rm -rf feeds/luci/applications/luci-app-serverchan
+rm -rf feeds/luci/applications/luci-app-homeproxy
+rm -rf feeds/luci/applications/luci-app-openclash
+
 rm ./feeds.conf.default
 echo 'src-git packages https://github.com/coolsnowwolf/packages' >> feeds.conf.default
 echo 'src-git luci https://github.com/coolsnowwolf/luci' >> feeds.conf.default
@@ -7,6 +25,26 @@ echo 'src-git telephony https://git.openwrt.org/feed/telephony.git' >> feeds.con
 echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
 echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
 echo 'src-git homeproxy https://github.com/immortalwrt/homeproxy' >> feeds.conf.default
+
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages aria2
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages ariang
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-vlmcsd
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-kodexplorer
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-usb-printer
+git_sparse_clone luci https://github.com/chenmozhijin/turboacc luci-app-turboacc
+
+git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
+git clone --depth=1 https://github.com/Jason6111/luci-app-netdata package/luci-app-netdata
+git clone --depth=1 https://github.com/destan19/OpenAppFilter package/OpenAppFilter
+git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
+
+# 在线用户
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-onliner
+sudo chmod -Rf 755 package/luci-app-onliner
+
+# msd_lite
+git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
+git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
 #Open Clash
 cd ./package
