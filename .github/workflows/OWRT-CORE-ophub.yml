@@ -204,7 +204,8 @@ jobs:
       - name: 安装订阅源
         run: |
           cd openwrt
-          
+          #支持firewall4的turboacc
+          ${GITHUB_WORKSPACE}/sh/add_turboacc.sh
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
