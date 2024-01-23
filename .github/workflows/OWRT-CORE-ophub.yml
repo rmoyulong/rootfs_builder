@@ -212,22 +212,7 @@ jobs:
         run: |
           
           cd openwrt
-          
-          if [[ $DIY_P1_SH == *"quick.sh"*  ]] ; then
-            ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
-          elif [[ $DIY_P1_SH == *"lede.sh"*  ]] ; then
-            ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
-            #删除冲突的插件 
-            rm -rf feeds/kenzo/{alist,luci-app-alist}
-          elif [[ $DIY_P1_SH == *"tiny.sh"*  ]] ; then
-            ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
-            #删除冲突的插件 
-            rm -rf feeds/kenzok8/{alist,luci-app-alist,base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,miniupnpd-iptables,wireless-regdb}
-          else
-            ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
-            #删除冲突的插件 
-            rm -rf feeds/kiddin9/{alist,luci-app-alist,base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,miniupnpd-iptables,wireless-regdb}
-          fi
+          ${GITHUB_WORKSPACE}/${OWRT_DIY_P2_SH}
 
       - name: 自定义设置
         run: |
@@ -239,10 +224,10 @@ jobs:
           
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
             #sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
-            # 临时修复acpid,xfsprogs,aliyundrive-webdav
+            # 临时修复acpid,xfsprogs,aliyundrive-webdav 导致的编译失败问题
             #sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
             sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
-            #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefil
+            #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
           fi
           
       - name: 下载编译依赖
