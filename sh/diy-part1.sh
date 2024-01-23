@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # 移除要替换的包
-rm -rf feeds/packages/net/alist
 rm -rf feeds/packages/net/aria2
 rm -rf feeds/packages/net/ariang
 rm -rf feeds/packages/net/mosdns
@@ -16,6 +15,7 @@ rm -rf feeds/luci/applications/luci-app-netdata
 rm -rf feeds/luci/applications/luci-app-serverchan
 rm -rf feeds/luci/applications/luci-app-homeproxy
 rm -rf feeds/luci/applications/luci-app-openclash
+rm -rf feeds/luci/applications/luci-app-turboacc
 
 rm ./feeds.conf.default
 echo 'src-git packages https://github.com/coolsnowwolf/packages' >> feeds.conf.default
@@ -28,9 +28,9 @@ echo 'src-git homeproxy https://github.com/immortalwrt/homeproxy' >> feeds.conf.
 
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages aria2
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages ariang
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-vlmcsd
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-kodexplorer
-git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-usb-printer
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-vlmcsd
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-kodexplorer
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-usb-printer
 git_sparse_clone luci https://github.com/chenmozhijin/turboacc luci-app-turboacc
 
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff package/luci-app-poweroff
