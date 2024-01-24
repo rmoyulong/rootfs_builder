@@ -60,6 +60,9 @@ sed -i "48a\\
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config\n\
 " package/lean/default-settings/files/zzz-default-settings
 
+# Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
+sed -i 's/luci-theme-bootstrap/luci-theme-material/g' ./feeds/luci/collections/luci/Makefile
+
 # Modify default banner
 echo 'Modify default banner...'
 build_date=$(date +"%Y-%m-%d %H:%M:%S")
