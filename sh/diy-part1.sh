@@ -11,6 +11,7 @@ rm -rf feeds/luci/applications/luci-app-msd_lite
 rm -rf feeds/luci/applications/luci-app-smartdns
 rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/luci/themes/luci-theme-netgear
+rm -rf feeds/luci/themes/luci-theme-material
 rm -rf feeds/luci/applications/luci-app-netdata
 rm -rf feeds/luci/applications/luci-app-serverchan
 rm -rf feeds/luci/applications/luci-app-homeproxy
@@ -58,8 +59,10 @@ git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-a
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
 #theme
-git clone https://github.com/jerrykuku/luci-app-argon-config.git package/luci-app-argon-config
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-app-argon-config
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-argon
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-material
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-openwrt-2020
 
 # 取消主题默认设置
 find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
