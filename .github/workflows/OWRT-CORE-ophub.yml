@@ -260,7 +260,7 @@ jobs:
         id: clean
         if: ${{ steps.compile.outputs.status }} == 'success' && !cancelled()
         run: |
-          # Clean up server space
+          # 清理服务器空间
           
           cd openwrt/
           mkdir output
