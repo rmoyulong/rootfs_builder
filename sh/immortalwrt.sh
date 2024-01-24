@@ -51,6 +51,14 @@ sudo chmod -Rf 755 package/luci-app-onliner
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
+#theme
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-app-argon-config
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-argon
+git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-openwrt-2020
+
+# 取消主题默认设置
+find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
+
 #Open Clash
 cd ./package
 
