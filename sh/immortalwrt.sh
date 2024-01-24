@@ -52,8 +52,8 @@ git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-a
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
 #theme
-git_sparse_clone master https://github.com/rmoyulong/mo_app luci-app-argon-config
-git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-argon
+git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 git_sparse_clone master https://github.com/rmoyulong/mo_app luci-theme-openwrt-2020
 
 # 取消主题默认设置
