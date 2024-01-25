@@ -211,6 +211,7 @@ jobs:
             #mv ${GITHUB_WORKSPACE}/lede/target/linux/armvirt target/linux/armvirt
             #sudo chmod -Rf 755 target/linux/armvirt
           fi
+          
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
@@ -228,7 +229,6 @@ jobs:
           rm -rf ./tmp* ./.config*          
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && mv $GITHUB_WORKSPACE/Config/$OWRT_CFG .config
           #echo -e 'CONFIG_PACKAGE_firewall=n\nCONFIG_DEFAULT_firewall=n\n' >> .config
-          rm -rf feeds/kenzo/homeproxy
           
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
             #sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
@@ -238,6 +238,10 @@ jobs:
             #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
             mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
             sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
+            #homeproxy
+            rm -rf feeds/kenzo/homeproxy
+            rm -rf feeds/homeproxy
+            git clone https://github.com/immortalwrt/homeproxy package/homeproxy
           fi
           
       - name: 下载编译依赖
