@@ -227,8 +227,8 @@ jobs:
           
           rm -rf ./tmp* ./.config*          
           [ -e $GITHUB_WORKSPACE/Config/$OWRT_CFG ] && mv $GITHUB_WORKSPACE/Config/$OWRT_CFG .config
-          echo -e 'CONFIG_PACKAGE_firewall=n\n' >> .config
-          echo -e 'CONFIG_DEFAULT_firewall=n\n' >> .config
+          #echo -e 'CONFIG_PACKAGE_firewall=n\n' >> .config
+          #echo -e 'CONFIG_DEFAULT_firewall=n\n' >> .config
           
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
             #sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
