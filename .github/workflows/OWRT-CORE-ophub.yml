@@ -210,8 +210,6 @@ jobs:
             ${GITHUB_WORKSPACE}/sh/add_turboacc.sh
             #mv ${GITHUB_WORKSPACE}/lede/target/linux/armvirt target/linux/armvirt
             #sudo chmod -Rf 755 target/linux/armvirt
-          else
-            mv ${GITHUB_WORKSPACE}/lede/Cc feeds/kenzo/homeproxy/Makefile
           fi
           
           ./scripts/feeds update -a
@@ -241,6 +239,7 @@ jobs:
             mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
             sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
             #homeproxy
+            mv ${GITHUB_WORKSPACE}/lede/Cc feeds/kenzo/homeproxy/Makefile
             #rm -rf feeds/kenzo/homeproxy
             #rm -rf feeds/homeproxy
             #git clone https://github.com/immortalwrt/homeproxy package/homeproxy
