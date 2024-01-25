@@ -35,7 +35,7 @@ echo 'src-git routing https://github.com/coolsnowwolf/routing' >> feeds.conf.def
 echo 'src-git telephony https://git.openwrt.org/feed/telephony.git' >> feeds.conf.default
 echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
 echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
-#echo 'src-git homeproxy https://github.com/immortalwrt/homeproxy' >> feeds.conf.default
+echo 'src-git homeproxy https://github.com/immortalwrt/homeproxy' >> feeds.conf.default
 
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages aria2
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages ariang
