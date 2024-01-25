@@ -239,9 +239,9 @@ jobs:
             mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
             sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
             #homeproxy
-            rm -rf feeds/kenzo/homeproxy
-            rm -rf feeds/homeproxy
-            git clone https://github.com/immortalwrt/homeproxy package/homeproxy
+            #rm -rf feeds/kenzo/homeproxy
+            #rm -rf feeds/homeproxy
+            #git clone https://github.com/immortalwrt/homeproxy package/homeproxy
           fi
           
       - name: 下载编译依赖
