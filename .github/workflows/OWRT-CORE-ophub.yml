@@ -210,6 +210,8 @@ jobs:
             ${GITHUB_WORKSPACE}/sh/add_turboacc.sh
             #mv ${GITHUB_WORKSPACE}/lede/target/linux/armvirt target/linux/armvirt
             #sudo chmod -Rf 755 target/linux/armvirt
+          else
+            mv ${GITHUB_WORKSPACE}/lede/Cc feeds/kenzo/homeproxy/Makefile
           fi
           
           ./scripts/feeds update -a
