@@ -229,11 +229,8 @@ jobs:
           #echo -e 'CONFIG_PACKAGE_firewall=n\nCONFIG_DEFAULT_firewall=n\n' >> .config
           
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
-            #sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
-            # 临时修复acpid,xfsprogs,aliyundrive-webdav 导致的编译失败问题
-            #sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
-            #sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
-            #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
+            # 修复 armv8 设备 xfsprogs 报错
+            #sed -i 's/TARGET_CFLAGS.*/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE/g' feeds/packages/utils/xfsprogs/Makefile
             mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
             sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
           fi
