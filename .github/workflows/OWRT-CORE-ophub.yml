@@ -239,15 +239,15 @@ jobs:
             mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
             sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
             #homeproxy
-            rm -rf package/network/config/firewall
+            #rm -rf package/network/config/firewall
             rm -rf package/network/config/firewall4
             rm -rf package/network/utils/iptables
             rm -rf package/network/utils/nftables
             rm -rf package/libs/libnftnl
             rm -rf package/network/services/fullconenat
-            mv ${GITHUB_WORKSPACE}/lede/firewall package/network/config/firewall
+            #mv ${GITHUB_WORKSPACE}/lede/firewall package/network/config/firewall
             mv ${GITHUB_WORKSPACE}/lede/firewall4 package/network/config/firewall4
-            sudo cp -r ${GITHUB_WORKSPACE}/lede/fullconenat package/network/utils/fullconenat
+            mv ${GITHUB_WORKSPACE}/lede/fullconenat package/network/utils/fullconenat
             mv ${GITHUB_WORKSPACE}/lede/fullconenat package/network/services/fullconenat
             mv ${GITHUB_WORKSPACE}/lede/fullconenat-nft package/network/utils/fullconenat-nft
             mv ${GITHUB_WORKSPACE}/lede/iptables package/network/utils/iptables
