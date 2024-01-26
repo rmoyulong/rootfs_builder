@@ -32,7 +32,7 @@ jobs:
       #源码版本
       OWRT_BRANCH: master
       #自定义config
-      OWRT_CFG: N1-armvirt.config
+      OWRT_CFG: armvirt-N1.config
       #设备类型
       OWRT_TYPE: 斐讯N1
       OWRT_LINUX: 6.1.70
