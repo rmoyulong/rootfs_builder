@@ -241,10 +241,14 @@ jobs:
             #homeproxy
             rm -rf package/network/config/firewall
             rm -rf package/network/config/firewall4
+            rm -rf package/network/utils/iptables
+            rm -rf package/network/utils/nftables
             mv ${GITHUB_WORKSPACE}/lede/firewall package/network/config/firewall
             mv ${GITHUB_WORKSPACE}/lede/firewall4 package/network/config/firewall4
             mv ${GITHUB_WORKSPACE}/lede/fullconenat package/network/utils/fullconenat
             mv ${GITHUB_WORKSPACE}/lede/fullconenat-nft package/network/utils/fullconenat-nft
+            mv ${GITHUB_WORKSPACE}/lede/iptables package/network/utils/iptables
+            mv ${GITHUB_WORKSPACE}/lede/nftables package/network/utils/nftables
             rm -rf feeds/kenzo/homeproxy
             rm -rf feeds/homeproxy
             git clone https://github.com/immortalwrt/homeproxy package/homeproxy
