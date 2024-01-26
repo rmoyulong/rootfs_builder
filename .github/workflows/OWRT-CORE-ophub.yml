@@ -247,7 +247,7 @@ jobs:
             rm -rf package/network/services/fullconenat
             mv ${GITHUB_WORKSPACE}/lede/firewall package/network/config/firewall
             mv ${GITHUB_WORKSPACE}/lede/firewall4 package/network/config/firewall4
-            mv ${GITHUB_WORKSPACE}/lede/fullconenat package/network/utils/fullconenat
+            sudo cp -r ${GITHUB_WORKSPACE}/lede/fullconenat package/network/utils/fullconenat
             mv ${GITHUB_WORKSPACE}/lede/fullconenat package/network/services/fullconenat
             mv ${GITHUB_WORKSPACE}/lede/fullconenat-nft package/network/utils/fullconenat-nft
             mv ${GITHUB_WORKSPACE}/lede/iptables package/network/utils/iptables
