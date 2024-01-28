@@ -23,7 +23,7 @@ permissions: write-all
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   #编译平台，X64包含X86,arm
-  OWRT_TARGET: s905d_s912
+  OWRT_TARGET: s905lb-r3300l
   #默认主题
   OWRT_THEME: material
   #默认主机名
@@ -39,7 +39,7 @@ env:
   CONFIG_FILE: Config/armsr.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2-ext.sh
-  OWRT_TYPE: 斐讯N1、章鱼星球
+  OWRT_TYPE: 联通Q7
   OWRT_LINUX: 6.1.60
   TZ: Asia/Shanghai
   FILE_NAME: ARMv8
@@ -134,7 +134,7 @@ jobs:
     - name: 打包OpenWrt
       uses: ophub/amlogic-s9xxx-openwrt@main
       with:
-        openwrt_path: https://github.com/rmoyulong/ophub-OpenWrt/releases/download/OpenWrt_s912_23.12.15_08.38.04/openwrt-armvirt-64-generic-rootfs.tar.gz
+        openwrt_path: https://github.com/rmoyulong/rootfs_builder/releases/download/OpenWrt_s905d_24.01.27_12.42.52/immortalwrt-armsr-armv8-generic-rootfs.tar.gz
         openwrt_board: ${{ env.OWRT_TARGET }}
         openwrt_kernel: ${{ env.OWRT_LINUX }}
         auto_kernel: ${{ inputs.auto_kernel }}
