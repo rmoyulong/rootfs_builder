@@ -2,9 +2,8 @@
 name: ophub-斐讯N1-armvirt
 
 on:
-  #自动编译：每天早上4点
-  #schedule:
-    #- cron: 0 20 * * *
+  schedule:
+    - cron: 0 8 5,19 * *
   #手动编译
   workflow_dispatch:
 
