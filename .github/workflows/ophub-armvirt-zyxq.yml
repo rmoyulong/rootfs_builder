@@ -2,8 +2,9 @@
 name: ophub-章鱼星球-armvirt
 
 on:
-  schedule:
-    - cron: 0 8 5,19 * *
+  #自动编译：每天早上4点
+  #schedule:
+    #- cron: 0 20 * * *
   #手动编译
   workflow_dispatch:
 
@@ -31,7 +32,7 @@ jobs:
       #源码版本
       OWRT_BRANCH: master
       #自定义config
-      OWRT_CFG: armvirt-zyxq.config
+      OWRT_CFG: lede.config
       #设备类型
       OWRT_TYPE: 章鱼星球
       OWRT_LINUX: 6.1.70
