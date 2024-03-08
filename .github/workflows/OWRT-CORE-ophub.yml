@@ -302,7 +302,7 @@ jobs:
 
       - name: 打包原始资料
         run: |
-          cp -f output/*.* ${{ env.PACKAGED_OUTPUTPATH }}/
+          cp -f openwrt/output/*.* ${{ env.PACKAGED_OUTPUTPATH }}/
         
       - name: 上传固件
         uses: rmoyulong/action-gh-release@master
