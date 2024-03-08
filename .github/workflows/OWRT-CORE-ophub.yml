@@ -244,8 +244,9 @@ jobs:
           if [[ "${{ inputs.OWRT_URL }}" == *"lede"* ]]; then
             # 修复 armv8 设备 xfsprogs 报错
             #sed -i 's/TARGET_CFLAGS.*/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE/g' feeds/packages/utils/xfsprogs/Makefile
-            mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
-            sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
+            #mv ${GITHUB_WORKSPACE}/lede/Makefile feeds/packages/utils/xfsprogs/Makefile
+            #sudo chmod -Rf 755 feeds/packages/utils/xfsprogs
+            sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl/perlmod.mk
           fi
           
       - name: 下载编译依赖
