@@ -32,10 +32,10 @@ jobs:
       #源码版本
       OWRT_BRANCH: master
       #自定义config
-      OWRT_CFG: lede.config
+      OWRT_CFG: armvirt-zyxq.config
       #设备类型
       OWRT_TYPE: 章鱼星球
-      OWRT_LINUX: 6.1.70
+      OWRT_LINUX: 6.1.80
       OWRT_FILES: zyxq/files
       OWRT_DIY_P1_SH: sh/diy-part1.sh
       OWRT_DIY_P2_SH: sh/diy-part2.sh
